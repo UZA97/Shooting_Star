@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour
         while(stringReader != null)
         {
             string line = stringReader.ReadLine(); // 텍스트 데이터를 한줄씩 반환. 
-            Debug.Log(line);
             if(line == null)
                 break;
             

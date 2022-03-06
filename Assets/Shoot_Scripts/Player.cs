@@ -10,8 +10,7 @@ public class Player : MonoBehaviour
     public bool isTouchRight;
     public bool isHit;
     public bool isBoomTime;
-    public bool[] joyControl;
-    public bool isControl;
+    public FixedJoystick joystick;
     public bool isButtonA;
     public bool isButtonB;
     public int life;
@@ -46,48 +45,26 @@ public class Player : MonoBehaviour
         Fire();
         Reload();
     }
-    public void JoyPanel(int type)
-    {
-        for(int i =0; i < 9; i++) {
-            joyControl[i] = i == type;
-        }
-    }
-    public void JoyDown()
-    {
-        isControl = true;
-    }
-    public void JoyUp()
-    {
-        isControl = false;
-    }
+
     void Move()
     {
         //#Keyboard Control Value
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        //#Joy Control Value
-        if(joyControl[0]) { h = -1; v = 1;}
-        if(joyControl[1]) { h = 0; v = 1;}
-        if(joyControl[2]) { h = 1; v = 1;}
-        if(joyControl[3]) { h = -1; v = 0;}
-        if(joyControl[4]) { h = 0; v = 0;}
-        if(joyControl[5]) { h = 1; v = 0;}
-        if(joyControl[6]) { h = -1; v = -1;}
-        if(joyControl[7]) { h = 0; v = -1;}
-        if(joyControl[8]) { h = 1; v = -1;}
+        float x = joystick.Horizontal;
+        float y = joystick.Vertical;
 
-        if ((isTouchRight && h == 1) || (isTouchLeft && h == -1) || !isControl)
-            h = 0;
-        if ((isTouchUp && v == 1) || (isTouchDown && v == -1) || !isControl)
-            v = 0;
+        if ((isTouchRight && x == 1) || (isTouchLeft && x == -1))
+            x = 0;
+        if ((isTouchUp && y == 1) || (isTouchDown && y == -1))
+            y = 0;
         Vector3 curPos = transform.position;
-        Vector3 nextPos = new Vector3(h, v, 0) * speed * Time.deltaTime;
+        Vector3 nextPos = new Vector3(x, y, 0) * speed * Time.deltaTime;
         // 물리적이동이 아닌 transfor이동에는 Time.DeltaTime(완료되는데까지 걸린 시간/s) 
 
         transform.position = curPos + nextPos;
 
-        if(Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
-            animator.SetInteger("Input", (int)h);
+        // PC Version
+        // if(Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
+        //     animator.SetInteger("Input", (int)x);
     }
     public void ButtonADown()
     {

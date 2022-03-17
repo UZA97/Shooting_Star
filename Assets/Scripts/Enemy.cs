@@ -96,21 +96,21 @@ public class Enemy : MonoBehaviour
     {
         if(!gameObject.activeSelf)
             return;
-        GameObject bulletR = objectManager.MakeObj("BulletBossA");
+        GameObject bulletR = objectManager.MakeObj(Objects.BulletBossA);
         bulletR.transform.position = transform.position + Vector3.right * 0.3f;
-        GameObject bulletRR = objectManager.MakeObj("BulletBossA");
+        GameObject bulletRR = objectManager.MakeObj(Objects.BulletBossA);
         bulletRR.transform.position = transform.position + Vector3.right * 0.45f;
         
-        GameObject bulletRRR = objectManager.MakeObj("BulletBossA");
+        GameObject bulletRRR = objectManager.MakeObj(Objects.BulletBossA);
         bulletRRR.transform.position = transform.position + Vector3.right * 0.6f; 
         
-        GameObject bulletL = objectManager.MakeObj("BulletBossA");
+        GameObject bulletL = objectManager.MakeObj(Objects.BulletBossA);
         bulletL.transform.position = transform.position + Vector3.left * 0.3f;
         
-        GameObject bulletLL = objectManager.MakeObj("BulletBossA");
+        GameObject bulletLL = objectManager.MakeObj(Objects.BulletBossA);
         bulletLL.transform.position = transform.position + Vector3.left * 0.45f;
         
-        GameObject bulletLLL = objectManager.MakeObj("BulletBossA");
+        GameObject bulletLLL = objectManager.MakeObj(Objects.BulletBossA);
         bulletLLL.transform.position = transform.position + Vector3.left * 0.6f;
         
         Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
             return;
         for(int i = 0; i < 5; i++)
         {
-            GameObject bullet = objectManager.MakeObj("BulletEnemyB");
+            GameObject bullet = objectManager.MakeObj(Objects.BulletEnemyB);
             bullet.transform.position = transform.position;
             Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
             Vector2 dirVec = player.transform.position - transform.position;
@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
     {
         if(!gameObject.activeSelf)
             return;
-        GameObject bullet = objectManager.MakeObj("BulletEnemyA");
+        GameObject bullet = objectManager.MakeObj(Objects.BulletEnemyA);
         bullet.transform.position = transform.position;
         bullet.transform.rotation = Quaternion.identity;
 
@@ -180,7 +180,7 @@ public class Enemy : MonoBehaviour
         int roundNumB = 55;
         int roundNum = curPatternCount%2 == 0 ? roundNumA : roundNumB;
         for(int i = 0; i < roundNum; i++) {
-            GameObject bullet = objectManager.MakeObj("BulletBossB");
+            GameObject bullet = objectManager.MakeObj(Objects.BulletBossB);
             bullet.transform.position = transform.position;
             bullet.transform.rotation = Quaternion.identity;
 
@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour
 
         if(enemyName == "S")
         {
-            GameObject bullet = objectManager.MakeObj("BulletEnemyA");
+            GameObject bullet = objectManager.MakeObj(Objects.BulletEnemyA);
             bullet.transform.position = transform.position;
             Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
             Vector3 dirVec = player.transform.position - transform.position;
@@ -215,10 +215,10 @@ public class Enemy : MonoBehaviour
         }
         else if(enemyName == "L")
         {
-            GameObject bulletR = objectManager.MakeObj("BulletEnemyB");
+            GameObject bulletR = objectManager.MakeObj(Objects.BulletEnemyB);
             bulletR.transform.position = transform.position + Vector3.right * 0.3f;
             
-            GameObject bulletL = objectManager.MakeObj("BulletEnemyB");
+            GameObject bulletL = objectManager.MakeObj(Objects.BulletEnemyB);
             bulletL.transform.position = transform.position + Vector3.left * 0.3f;
 
             Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
@@ -257,15 +257,15 @@ public class Enemy : MonoBehaviour
             if(ran < 50) {
             }
             else if(ran < 70) { // Coin
-                GameObject itemCoin = objectManager.MakeObj("itemCoin");
+                GameObject itemCoin = objectManager.MakeObj(Objects.itemCoin);
                 itemCoin.transform.position = transform.position;
             }
             else if(ran < 85) { // Power
-                GameObject itemPower = objectManager.MakeObj("itemPower");
+                GameObject itemPower = objectManager.MakeObj(Objects.itemPower);
                 itemPower.transform.position = transform.position;
             }
             else if(ran < 100) { // Boom
-                GameObject itemBoom = objectManager.MakeObj("itemBoom");
+                GameObject itemBoom = objectManager.MakeObj(Objects.itemBoom);
                 itemBoom.transform.position = transform.position;
             }
             gameObject.SetActive(false);
@@ -278,10 +278,10 @@ public class Enemy : MonoBehaviour
                 transform.rotation = Quaternion.identity;
                 gameManager.CallExplosion(transform.position, enemyName);
                 
-                GameObject[] bulletsA = objectManager.GetPool("BulletEnemyA");
-                GameObject[] bulletsB = objectManager.GetPool("BulletEnemyB");
-                GameObject[] bulletsBosA = objectManager.GetPool("BulletBossA");
-                GameObject[] bulletsBosB = objectManager.GetPool("BulletBossB");
+                GameObject[] bulletsA = objectManager.GetPool(Objects.BulletEnemyA);
+                GameObject[] bulletsB = objectManager.GetPool(Objects.BulletEnemyB);
+                GameObject[] bulletsBosA = objectManager.GetPool(Objects.BulletBossA);
+                GameObject[] bulletsBosB = objectManager.GetPool(Objects.BulletBossB);
                 for(int i = 0; i < bulletsA.Length; i++) {
                     if(bulletsA[i].activeSelf) {
                         bulletsA[i].SetActive(false);

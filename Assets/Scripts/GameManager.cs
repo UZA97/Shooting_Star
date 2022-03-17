@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public List<spawn> spawnList; 
     public int spawnIndex;
     public bool spawnEnd;
-
+    Objects objects;
     void Awake()
     {
         spawnList = new List<spawn>();
@@ -107,24 +107,23 @@ public class GameManager : MonoBehaviour
     }
     void SpawnEnemy()
     {
-        int enemyIndex = 0;
         switch(spawnList[spawnIndex].type)
         {
             case "S":
-                enemyIndex = 0;
+                objects = Objects.EnemyS;
                 break;
             case "M":
-                enemyIndex = 1;
+                objects = Objects.EnemyM;
                 break;
             case "L":
-                enemyIndex = 2;
+                objects = Objects.EnemyL;
                 break;
             case "B":
-                enemyIndex = 3;
+                objects = Objects.EnemyB;
                 break;
         }
         int enemyPoint = spawnList[spawnIndex].point;
-        GameObject enemy = objectManager.MakeObj(enemyObjs[enemyIndex]);
+        GameObject enemy = objectManager.MakeObj(objects);
         enemy.transform.position = spawnPoints[enemyPoint].position;
 
         Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
@@ -201,7 +200,7 @@ public class GameManager : MonoBehaviour
     }
     public void CallExplosion(Vector3 pos, string type)
     {
-        GameObject explosion = objectManager.MakeObj("Explosion");
+        GameObject explosion = objectManager.MakeObj(Objects.Explosion);
         Explosion explosionLogic = explosion.GetComponent<Explosion>();
 
         explosion.transform.position = pos;

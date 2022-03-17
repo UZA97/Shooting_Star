@@ -45,7 +45,7 @@ public class Follower : MonoBehaviour
         if(curShotDealay < maxShotDealay)
             return;
         
-        GameObject bullet = objectManager.MakeObj("BulletFollower");
+        GameObject bullet = objectManager.MakeObj(Objects.BulletFollower);
         bullet.transform.position = transform.position;
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         rigid.AddForce(Vector2.up * 12, ForceMode2D.Impulse);

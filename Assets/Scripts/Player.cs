@@ -94,38 +94,38 @@ public class Player : MonoBehaviour
         {
             case 1:
                 //Instantiate : 
-                GameObject bullet = objectManager.MakeObj("BulletPlayerA");
+                GameObject bullet = objectManager.MakeObj(Objects.BulletPlayerA);
                 bullet.transform.position = transform.position; 
                 
                 Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
                 rigid.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
                 break;
             case 2:
-                GameObject bulletR = objectManager.MakeObj("BulletPlayerA");
+                GameObject bulletR = objectManager.MakeObj(Objects.BulletPlayerA);
                 bulletR.transform.position = transform.position +  Vector3.right * 0.1f;
                 Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
                 rigidR.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
-                GameObject bulletL = objectManager.MakeObj("BulletPlayerA");
+                GameObject bulletL = objectManager.MakeObj(Objects.BulletPlayerA);
                 bulletL.transform.position = transform.position + Vector3.left * 0.1f;
                 Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
                 rigidL.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
                 break;
             case 3:
-                GameObject bulletC = objectManager.MakeObj("BulletPlayerB");
+                GameObject bulletC = objectManager.MakeObj(Objects.BulletPlayerB);
                 bulletC.transform.position =transform.position;
                 Rigidbody2D rigidC = bulletC.GetComponent<Rigidbody2D>();
                 rigidC.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
                 break;
             default:
-                GameObject bulletRR = objectManager.MakeObj("BulletPlayerA");
+                GameObject bulletRR = objectManager.MakeObj(Objects.BulletPlayerA);
                 bulletRR.transform.position = transform.position +  Vector3.right * 0.25f;
                 Rigidbody2D rigidRR = bulletRR.GetComponent<Rigidbody2D>();
                 rigidRR.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
-                GameObject bulletCC = objectManager.MakeObj("BulletPlayerB");
+                GameObject bulletCC = objectManager.MakeObj(Objects.BulletPlayerB);
                 bulletCC.transform.position = transform.position;
                 Rigidbody2D rigidCC = bulletCC.GetComponent<Rigidbody2D>();
                 rigidCC.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
-                GameObject bulletLL = objectManager.MakeObj("BulletPlayerA");
+                GameObject bulletLL = objectManager.MakeObj(Objects.BulletPlayerA);
                 bulletLL.transform.position = transform.position + Vector3.left * 0.25f;
                 Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
                 rigidLL.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
@@ -153,52 +153,52 @@ public class Player : MonoBehaviour
         if(boom == 0)
             return;
             
-        boom --;
+        boom--;
         isBoomTime = true;
         gameManager.UpdateBoomIcon(boom);
 
         boomEffect.SetActive(true);
         Invoke("OffBoomEffect", 2f);
         
-        GameObject[] enemiesL = objectManager.GetPool("EnemyL");//GameObject.FindGameObjectsWithTag("Enemy");
-        GameObject[] enemiesM = objectManager.GetPool("EnemyM");
-        GameObject[] enemiesS = objectManager.GetPool("EnemyS");
-        GameObject[] enemiesB = objectManager.GetPool("EnemyB");
+        GameObject[] enemiesS = objectManager.GetPool(Objects.EnemyS);//GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemiesM = objectManager.GetPool(Objects.EnemyM);
+        GameObject[] enemiesL = objectManager.GetPool(Objects.EnemyL);
+        GameObject[] enemiesB = objectManager.GetPool(Objects.EnemyB);
         // FindGameObjectsWithTag : 태그로 장면의 모든 오브젝트 추출
         //# Remove Enemy
         for(int i = 0; i < enemiesL.Length; i++) {
             if(enemiesL[i].activeSelf) {
                 Enemy enmemyLogic = enemiesL[i].GetComponent<Enemy>();
-                enmemyLogic.OnHit(100);
+                enmemyLogic.OnHit(250);
             }
         }
 
         for(int i = 0; i < enemiesM.Length; i++) {
             if(enemiesM[i].activeSelf) {
                 Enemy enmemyLogic = enemiesM[i].GetComponent<Enemy>();
-                enmemyLogic.OnHit(100);
+                enmemyLogic.OnHit(250);
             }
         }
 
         for(int i = 0; i < enemiesS.Length; i++) {
             if(enemiesS[i].activeSelf) {
                 Enemy enmemyLogic = enemiesS[i].GetComponent<Enemy>();
-                enmemyLogic.OnHit(100);
+                enmemyLogic.OnHit(250);
             }
         }
         
         for(int i = 0; i < enemiesB.Length; i++) {
             if(enemiesB[i].activeSelf) {
                 Enemy enmemyLogic = enemiesB[i].GetComponent<Enemy>();
-                enmemyLogic.OnHit(100);
+                enmemyLogic.OnHit(250);
             }
         }
 
         //# Remove Enemy Bullet
-        GameObject[] bulletsA = objectManager.GetPool("BulletEnemyA");
-        GameObject[] bulletsB = objectManager.GetPool("BulletEnemyB");
-        GameObject[] bulletsBosA = objectManager.GetPool("BulletBossA");
-        GameObject[] bulletsBosB = objectManager.GetPool("BulletBossB");
+        GameObject[] bulletsA = objectManager.GetPool(Objects.BulletEnemyA);
+        GameObject[] bulletsB = objectManager.GetPool(Objects.BulletEnemyB);
+        GameObject[] bulletsBosA = objectManager.GetPool(Objects.BulletBossA);
+        GameObject[] bulletsBosB = objectManager.GetPool(Objects.BulletBossB);
         
         for(int i = 0; i < bulletsA.Length; i++) {
             if(bulletsA[i].activeSelf) {

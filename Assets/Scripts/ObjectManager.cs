@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
-
+public enum Objects
+{
+    EnemyS, EnemyM, EnemyL, EnemyB, itemCoin, itemPower, itemBoom, BulletPlayerA, BulletPlayerB, BulletEnemyA, BulletEnemyB, BulletFollower, BulletBossA, BulletBossB, Explosion
+}
 public class ObjectManager : MonoBehaviour
 {
     // 오브젝트 풀링 -> 생성, 삭제하면서 조각난 메모리(가비지컬렉트=GC)가 쌓여 에러발생유도를 방지 
@@ -40,28 +43,26 @@ public class ObjectManager : MonoBehaviour
     GameObject[] bulletBossA;
     GameObject[] bulletBossB;
     GameObject[] explosion;
-    enum enemies{
-        EnemyB, EnemyL, EnemyM, EnemyS, itemCoin,itemPower,itemBoom,BulletPlayerA, BulletPlayerB, BulletEnemyA, BulletEnemyB, BulletFollower, BulletBossA, BulletBossB, Explosion
-    }
-
-    void Awake() {
+    
+    void Awake()
+    {
         enemyB = new GameObject[10];
-        enemyL = new GameObject[100];
-        enemyM = new GameObject[100];
-        enemyS = new GameObject[200];
+        enemyL = new GameObject[10];
+        enemyM = new GameObject[10];
+        enemyS = new GameObject[20];
 
-        itemCoin = new GameObject[200];
-        itemPower = new GameObject[100];
-        itemBoom = new GameObject[100];
+        itemCoin = new GameObject[20];
+        itemPower = new GameObject[10];
+        itemBoom = new GameObject[10];
 
-        bulletPlayerA = new GameObject[1000];
-        bulletPlayerB = new GameObject[1000];
-        bulletEnemyA = new GameObject[1000];
-        bulletEnemyB = new GameObject[1000];
-        bulletFollower = new GameObject[1000];
-        bulletBossA = new GameObject[5000];
-        bulletBossB = new GameObject[5000];
-        explosion = new GameObject[1000];
+        bulletPlayerA = new GameObject[100];
+        bulletPlayerB = new GameObject[100];
+        bulletEnemyA = new GameObject[100];
+        bulletEnemyB = new GameObject[100];
+        bulletFollower = new GameObject[100];
+        bulletBossA = new GameObject[500];
+        bulletBossB = new GameObject[500];
+        explosion = new GameObject[100];
         Gernerate();
     }
     void Gernerate()
@@ -145,92 +146,38 @@ public class ObjectManager : MonoBehaviour
             explosion[index].SetActive(false);
         }
     }
-    public GameObject MakeObj(string type)
+    public GameObject MakeObj(Objects objects)
     {
-        // if(type == "EnemyB") {
-        //     targetPool = enemyB;
-        //     return targetPool[targetPool.Length];
-        // }
-        // else if(type == "EnemyL")
-        //     targetPool = enemyL;
-        // else if(type == "EnemyM")
-        //     targetPool = enemyM;
-        // else if(type == "EnemyS")
-        //     targetPool = enemyS;
-        // else if(type == "itemCoin")
-        //     targetPool = itemCoin;
-        // else if(type == "itemPower")
-        //     targetPool = itemPower;
-        // else if(type == "itemBoom")
-        //     targetPool = itemBoom;
-        // else if(type == "BulletPlayerA")
-        //     targetPool = bulletPlayerA;
-        // else if(type == "BulletPlayerB")
-        //     targetPool = bulletPlayerB;
-        // else if(type == "BulletEnemyA")
-        //     targetPool = bulletEnemyA;
-        // else if(type == "BulletEnemyB")
-        //     targetPool = bulletEnemyB;
-        // else if(type == "BulletFollower")
-        //     targetPool = bulletFollower;
-        // else if(type == "BulletBossA")
-        //     targetPool = bulletBossA;
-        // else if(type == "BulletBossB")
-        //     targetPool = bulletBossB;
-        enemies Enemies;
-        if(Enum.TryParse("0",out Enemies))
-        {
-            Debug.Log(Enemies);
-        }
-        
-        switch (type)
-        {
-            case "EnemyB":
-                targetPool = enemyB;
-                break;
-            case "EnemyL":
-                targetPool = enemyL;
-                break;
-            case "EnemyM":
-                targetPool = enemyM;
-                break;
-            case "EnemyS":
-                targetPool = enemyS;
-                break;
-            case "itemCoin":
-                targetPool = itemCoin;
-                break;
-            case "itemPower":
-                targetPool = itemPower;
-                break;
-            case "itemBoom":
-                targetPool = itemBoom;
-                break;
-            case "BulletPlayerA":
-                targetPool = bulletPlayerA;
-                break;
-            case "BulletPlayerB":
-                targetPool = bulletPlayerB;
-                break;
-            case "BulletEnemyA":
-                targetPool = bulletEnemyA;
-                break;
-            case "BulletEnemyB":
-                targetPool = bulletEnemyB;
-                break;
-            case "BulletFollower":
-                targetPool = bulletFollower;
-                break;
-            case "BulletBossA":
-                targetPool = bulletBossA;
-                break;
-            case "BulletBossB":
-                targetPool = bulletBossB;
-                break;
-            case "Explosion":
-                targetPool = explosion;
-                break;
-        }
+        if (objects == Objects.EnemyS)
+            targetPool = enemyS;
+        else if(objects == Objects.EnemyM) 
+            targetPool = enemyM;
+        else if(objects == Objects.EnemyL) 
+            targetPool = enemyL;
+        else if(objects == Objects.EnemyB)
+            targetPool = enemyB;
+        else if(objects == Objects.itemCoin)
+            targetPool = itemCoin;
+        else if(objects == Objects.itemPower)
+            targetPool = itemPower;
+        else if(objects == Objects.itemBoom)
+            targetPool = itemBoom;
+        else if(objects == Objects.BulletPlayerA)
+            targetPool = bulletPlayerA;
+        else if(objects == Objects.BulletPlayerB)
+            targetPool = bulletPlayerB;
+        else if(objects == Objects.BulletEnemyA)
+            targetPool = bulletEnemyA;
+        else if(objects == Objects.BulletEnemyB)
+            targetPool = bulletEnemyB;
+        else if(objects == Objects.BulletFollower)
+            targetPool = bulletFollower;
+        else if(objects == Objects.BulletBossA)
+            targetPool = bulletBossA;
+        else if(objects == Objects.BulletBossB)
+            targetPool = bulletBossB;
+        else if(objects == Objects.Explosion)
+            targetPool = explosion;
         int index = 0;
         while (index < targetPool.Length) {
             if (!targetPool[index].activeSelf){
@@ -241,84 +188,37 @@ public class ObjectManager : MonoBehaviour
         }
         return null;
     }
-    public GameObject[] GetPool(string type)
+    public GameObject[] GetPool(Objects objects)
     {
-        // if(type == "EnemyB")
-        //     targetPool = enemyB;
-        // else if(type == "EnemyL")
-        //     targetPool = enemyL;
-        // else if(type == "EnemyM")
-        //     targetPool = enemyM;
-        // else if(type == "EnemyS")
-        //     targetPool = enemyS;
-        // else if(type == "itemCoin")
-        //     targetPool = itemCoin;
-        // else if(type == "itemPower")
-        //     targetPool = itemPower;
-        // else if(type == "itemBoom")
-        //     targetPool = itemBoom;
-        // else if(type == "BulletPlayerA")
-        //     targetPool = bulletPlayerA;
-        // else if(type == "BulletPlayerB")
-        //     targetPool = bulletPlayerB;
-        // else if(type == "BulletEnemyA")
-        //     targetPool = bulletEnemyA;
-        // else if(type == "BulletEnemyB")
-        //     targetPool = bulletEnemyB;
-        // else if(type == "BulletFollower")
-        //     targetPool = bulletFollower;
-        // else if(type == "BulletBossA")
-        //     targetPool = bulletBossA;
-        // else if(type == "BulletBossB")
-        //     targetPool = bulletBossB;
-        switch (type)
-        {
-            case "EnemyB":
-                targetPool = enemyB;
-                break;
-            case "EnemyL":
-                targetPool = enemyL;
-                break;
-            case "EnemyM":
-                targetPool = enemyM;
-                break;
-            case "EnemyS":
-                targetPool = enemyS;
-                break;
-            case "itemCoin":
-                targetPool = itemCoin;
-                break;
-            case "itemPower":
-                targetPool = itemPower;
-                break;
-            case "itemBoom":
-                targetPool = itemBoom;
-                break;
-            case "BulletPlayerA":
-                targetPool = bulletPlayerA;
-                break;
-            case "BulletPlayerB":
-                targetPool = bulletPlayerB;
-                break;
-            case "BulletEnemyA":
-                targetPool = bulletEnemyA;
-                break;
-            case "BulletEnemyB":
-                targetPool = bulletEnemyB;
-                break;
-            case "BulletFollower":
-                targetPool = bulletFollower;
-                break;
-            case "BulletBossA":
-                targetPool = bulletBossA;
-                break;
-            case "BulletBossB":
-                targetPool = bulletBossB;
-                break;
-            case "Explosion":
-                targetPool = explosion;
-                break;
-        }
+        if (objects == Objects.EnemyS)
+            targetPool = enemyS;
+        else if(objects == Objects.EnemyM) 
+            targetPool = enemyM;
+        else if(objects == Objects.EnemyL) 
+            targetPool = enemyL;
+        else if(objects == Objects.EnemyB)
+            targetPool = enemyB;
+        else if(objects == Objects.itemCoin)
+            targetPool = itemCoin;
+        else if(objects == Objects.itemPower)
+            targetPool = itemPower;
+        else if(objects == Objects.itemBoom)
+            targetPool = itemBoom;
+        else if(objects == Objects.BulletPlayerA)
+            targetPool = bulletPlayerA;
+        else if(objects == Objects.BulletPlayerB)
+            targetPool = bulletPlayerB;
+        else if(objects == Objects.BulletEnemyA)
+            targetPool = bulletEnemyA;
+        else if(objects == Objects.BulletEnemyB)
+            targetPool = bulletEnemyB;
+        else if(objects == Objects.BulletFollower)
+            targetPool = bulletFollower;
+        else if(objects == Objects.BulletBossA)
+            targetPool = bulletBossA;
+        else if(objects == Objects.BulletBossB)
+            targetPool = bulletBossB;
+
         return targetPool;
     }
 }
